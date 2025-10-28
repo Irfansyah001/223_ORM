@@ -1,19 +1,19 @@
-module.exports = (sequelize, DataTypes) => {
-    const Komik = sequelize.define('Komik', {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
+module.exports = (sequelize, DataTypes) => { // Define the Komik model
+    const Komik = sequelize.define('Komik', { // Model name
+        id: { // Define the id field
+            type: DataTypes.INTEGER, // Integer type
+            autoIncrement: true, // Auto-incrementing
+            primaryKey: true // Primary key
         },
-        title: {
-            type: DataTypes.STRING,
+        title: { // Define the title field
+            type: DataTypes.STRING, // String type
         },
-        description: {
-            type: DataTypes.STRING,
+        description: { // Define the description field
+            type: DataTypes.STRING, // String type
         },
-        author: {
-            type: DataTypes.STRING,
+        author: { // Define the author field
+            type: DataTypes.STRING, // String type
         }      
     });
-    return Komik;
+    return Komik; // Return the Komik model
 };
