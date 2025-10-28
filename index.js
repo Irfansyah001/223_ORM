@@ -1,7 +1,7 @@
 const express = require('express'); // Import Express framework
 const app = express(); // Create an Express application
 const db = require('./models'); // Import Sequelize models
-const PORT = 3307 // Define the port number
+const PORT = 3308 // Define the port number
 
 app.use(express.json()); // Middleware to parse JSON request bodies
 
