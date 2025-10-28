@@ -42,3 +42,20 @@ app.get('/komiks', async (req, res) => { // Endpoint to get all Komiks
         res.send(error); // Send error if retrieval fails
     }  
 });
+
+app.put('/komiks/:id', async (req, res) => { // Endpoint to update a Komik by ID
+    const id = req.params.id; // Get ID from request parameters
+    const data = req.body; // Get updated data from request body
+
+    try {
+        const komik = await db.Komik.findByPk(id); // Find Komik by primary key
+        if (!komik) { // If Komik not found
+            return res.status(404).send({ message: 'Komik not found' }); // Send 404 response
+        }
+
+        await komik.update(data); // Update the Komik record
+        res.send({ message: 'Komik updated successfully', komik }); // Send success response
+    } catch (error) { // Handle errors
+        res.status(500).send({ message: 'Error updating Komik', error }); // Send error response
+    }
+});
