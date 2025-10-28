@@ -16,10 +16,29 @@ app.listen(PORT, async () => { // Start the server
 db.sequelize.sync() // Synchronize Sequelize models with the database
 .then((result) => { // On successful synchronization
     app.listen(PORT, () => { // Start the server
-        console.log(`Server is running on http://localhost:${PORT}`); // Log the server URL
+        console.log(`Databaseis running on http://localhost:${PORT}`); // Log the server URL
     });
 })
 
-.catch((err) => {
-    console.log(err);
+.catch((err) => { // On error during synchronization
+    console.log(err); // Log the error
+});
+
+app.post('/komiks', async (req, res) => { // Endpoint to create a new Komik
+    const data = req.body; // Get data from request body
+    try {
+        const komik = await db.Komik.create(data); // Create a new Komik record
+        res.send(komik); // Send the created record as response
+    } catch (error) { // Handle errors
+        res.send(error); // Send error if creation fails
+    }
+});
+
+app.get('/komiks', async (req, res) => { // Endpoint to get all Komiks
+    try {
+        const komiks = await db.Komik.findAll(); // Retrieve all Komik records
+        res.send(komiks); // Send the records as response
+    } catch (error) { // Handle errors
+        res.send(error); // Send error if retrieval fails
+    }  
 });
