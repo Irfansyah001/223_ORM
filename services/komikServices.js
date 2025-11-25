@@ -49,3 +49,21 @@ async function updateKomik(database, id, komikData) {
     await komik.update(komikData);
     return komik;
 }
+
+async function deleteKomik(database, id) {
+    const komik = await database.Komik.findByPk(id);
+    if (!komik) {
+        throw new Error(`Komik in ID ${id} not found`);
+    }
+
+    await komik.destroy();
+    return { message: `Komik with ID ${id} has been deleted.` };
+}
+
+module.exports = {
+    createKomik,
+    getAllKomiks,
+    getKomikById,
+    updateKomik,
+    deleteKomik
+};
