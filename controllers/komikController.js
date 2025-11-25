@@ -17,3 +17,16 @@ async function createKomik(req, res) {
         res.status(500).json({ success: false, message: error.message });
     }
 }
+
+async function getAllKomiks(req, res) {
+    try {
+        const result = await komikServices.getAllKomiks(db);
+        res.status(200).json({ 
+            success: true, 
+            data: result 
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+}
+
