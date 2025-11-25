@@ -30,3 +30,15 @@ async function getAllKomiks(req, res) {
     }
 }
 
+async function getKomikById(req, res) {
+    try {
+        const { id } = req.params;
+        const result = await komikServices.getKomikById(db, id);
+        res.status(200).json({ 
+            success: true, 
+            data: result 
+        });
+    } catch (error) {
+        res.status(404).json({ success: false, message: error.message });
+    }
+}
